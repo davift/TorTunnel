@@ -8,7 +8,6 @@ iptables -t nat -A OUTPUT -m owner --uid-owner debian-tor -j RETURN
 ## DNS
 iptables -t nat -A OUTPUT -p udp --dport 53 -j REDIRECT --to-ports 9053
 iptables -t nat -A OUTPUT -p tcp --dport 53 -j REDIRECT --to-ports 9053
-iptables -t nat -A OUTPUT -p udp -m owner --uid-owner debian-tor -m udp --dport 53 -j REDIRECT --to-ports 9053
 ## DNS address space mapping 10.192.0.0/10
 iptables -t nat -A OUTPUT -p tcp -d 10.192.0.0/10 -j REDIRECT --to-ports 9040
 iptables -t nat -A OUTPUT -p udp -d 10.192.0.0/10 -j REDIRECT --to-ports 9040
