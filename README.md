@@ -40,6 +40,20 @@ Optionally, restart the Tor service if necessary. All circuits will be refreshed
 sudo ./tortunnel.sh --refresh
 ```
 
+## Auto-start
+
+To auto-start TorTunnel edit the crontab of the root user:
+
+```
+sudo crontab -e
+```
+
+And add the following line:
+
+```
+@reboot /<PATH>/tortunnel.sh --start
+```
+
 ## Why?
 
 Disclosure: this project is a fork of https://github.com/neoslab/torbridge
