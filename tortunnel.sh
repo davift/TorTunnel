@@ -13,13 +13,16 @@ fi
 if [ $# -eq 0 ]
 then
     echo ''
-    echo "Usage: tortunnel [--backup] [--install|--start] [--restore|--stop] [--refresh]"
+    echo "Usage: tortunnel [--backup] [--install|--start] [--restore|--stop] [--refresh] [interface]"
     echo ''
-    echo "Options:"
+    echo "Required:"
     echo " --backup             backup the original system's configuration before installation"
     echo " --install, --start   make changes to the system's configuration and start tunneling"
-    echo " --restore, --stop    restore backup with original system's configuration"
+    echo " --restore, --stop    restore the backup with original system's configuration"
     echo " --refresh            request Tor to acquire a new connection"
+    echo ''
+    echo "Optional:"
+    echo " interface            defines what LAN interface to accept traffic on (requires --start)"
     echo ''
     exit 0
 fi
@@ -28,6 +31,10 @@ fi
 (which tor > /dev/null) || (apt update && apt install tor -y)
 # Install Curl if not present
 (which curl > /dev/null) || (apt update && apt install curl -y)
+
+if ip link show <interface_name> > /dev/null 2>&1; then
+    interface="$2"
+fi
 
 ## Selection
 while test $# -gt 0;
@@ -52,7 +59,7 @@ do
             # Overwrite Resolution (may not persist across boot)
             cat resolv.conf > /etc/resolv.conf
             # Overwrite Routes (will not persist across boot)
-            ./iptables.rules.sh
+            ./iptables.rules.sh $interface
             # Overwrite System Parameters (will not persist across boot)
             ./sysctl.conf.sh > /dev/null
             # Check Connection
