@@ -32,7 +32,7 @@ fi
 # Install Curl if not present
 (which curl > /dev/null) || (apt update && apt install curl -y)
 
-if ip link show <interface_name> > /dev/null 2>&1; then
+if ip link show "$2" > /dev/null 2>&1; then
     interface="$2"
 fi
 
