@@ -16,7 +16,7 @@ if [ -n "$interface" ]; then
   # Sinkholing UDP and ICMP
   iptables -t nat -A PREROUTING -i $interface -p udp -j REDIRECT --to-ports 9040
   iptables -t nat -A PREROUTING -i $interface -p icmp -j REDIRECT --to-ports 9040
-done
+fi
 
 # Local system outbound traffic
 ## NAT
