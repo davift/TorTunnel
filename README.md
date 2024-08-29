@@ -7,13 +7,16 @@ No more SOCKS configuration per application or `proxychains`. Even DNS is tunnel
 ## Usage
 
 ```
-Usage: tortunnel [--backup] [--install|--start] [--restore|--stop] [--refresh]
+Usage: tortunnel [--backup] [--install|--start] [--restore|--stop] [--refresh] [interface]
 
-Options:
+Required:
  --backup             backup the original system's configuration before installation
  --install, --start   make changes to the system's configuration and start tunneling
- --restore, --stop    restore backup with original system's configuration
+ --restore, --stop    restore the backup with original system's configuration
  --refresh            request Tor to acquire a new connection
+
+Optional:
+ interface            defines what LAN interface to accept traffic on (requires --start)
 ```
 
 The first step is to back up the original configuration for later restoration.
@@ -26,6 +29,12 @@ Then, start tunneling traffic through Tor.
 
 ```
 sudo ./tortunnel.sh --start
+```
+
+Optionally, start tunneling traffic through Tor including inbound requests on a given interface.
+
+```
+sudo ./tortunnel.sh --start eth0
 ```
 
 Finally, stop tunneling traffic through Tor.
@@ -53,6 +62,21 @@ And add the following line:
 ```
 @reboot /<PATH>/tortunnel.sh --start
 ```
+
+## Network Routing for LAN
+
+This feature allows TorTunnel to accept inbound traffic on a given interface and serve them via Tor.
+
+Change the default route and resolver on the clients (replace the IP accordingly):
+
+```
+sudo ip route add default via 192.168.1.1 dev enp1s0
+sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1
+echo 'nameserver 192.168.1.1' | sudo tee /etc/resolv.conf
+```
+
+Also, consider installing a DHCP service to automatically configure the client's network interfaces in the LAN interface.
 
 ## Why?
 
