@@ -43,7 +43,7 @@ Finally, stop tunneling traffic through Tor.
 sudo ./tortunnel.sh --stop
 ```
 
-Optionally, restart the Tor service if necessary. All circuits will be refreshed (new).
+If necessary, restart the Tor service. This will refresh (renew) all circuits.
 
 ```
 sudo ./tortunnel.sh --refresh
@@ -51,7 +51,7 @@ sudo ./tortunnel.sh --refresh
 
 ## Auto-start
 
-To auto-start TorTunnel edit the crontab of the root user:
+To auto-start TorTunnel on boot, edit the crontab of the root user:
 
 ```
 sudo crontab -e
