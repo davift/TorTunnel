@@ -60,7 +60,7 @@ sudo crontab -e
 And add the following line:
 
 ```
-@reboot /<PATH>/tortunnel.sh --start
+@reboot cd /<PATH>/TorTunnel ; ./tortunnel.sh --start eth1
 ```
 
 ## Network Routing for LAN
