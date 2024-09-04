@@ -28,11 +28,11 @@ then
 fi
 
 # Install Tor if not present
-(which tor > /dev/null) || (apt update && apt install tor -y)
+(which tor &> /dev/null) || (apt update && apt install tor -y)
 # Install Curl if not present
-(which curl > /dev/null) || (apt update && apt install curl -y)
+(which curl &> /dev/null) || (apt update && apt install curl -y)
 
-if ip link show "$2" > /dev/null 2>&1; then
+if ip link show "$2" &> /dev/null ; then
     interface="$2"
 fi
 
@@ -61,7 +61,7 @@ do
             # Overwrite Routes (will not persist across boot)
             ./iptables.rules.sh $interface
             # Overwrite System Parameters (will not persist across boot)
-            ./sysctl.conf.sh > /dev/null
+            ./sysctl.conf.sh &> /dev/null
             # Check Connection
             sleep 3s
             echo -n 'PublicIP ' ; curl http://ip.me || echo 'unknown'
