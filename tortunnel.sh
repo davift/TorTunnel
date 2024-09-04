@@ -31,6 +31,8 @@ fi
 (which tor &> /dev/null) || (apt update && apt install tor -y)
 # Install Curl if not present
 (which curl &> /dev/null) || (apt update && apt install curl -y)
+# Install JQ if not present
+(which jq &> /dev/null) || (apt update && apt install jq -y)
 
 if ip link show "$2" &> /dev/null ; then
     interface="$2"
