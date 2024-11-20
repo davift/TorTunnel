@@ -4,6 +4,14 @@ This script tunnels all system traffic through Tor and was designed and tested o
 
 No more SOCKS configuration per application or `proxychains`. Even DNS is tunneled!
 
+<video src="[https://your-hosted-link-to-video.mp4](https://youtu.be/uK5m3gBD9xM)" controls width="600"></video>
+
+Kali Linux \
+[![YouTube Video Title](https://img.youtube.com/vi/ike--N4JZ5I/0.jpg)](https://www.youtube.com/watch?v=ike--N4JZ5I)
+
+Ubuntu \
+[![YouTube Video Title](https://img.youtube.com/vi/uK5m3gBD9xM/0.jpg)](https://www.youtube.com/watch?v=uK5m3gBD9xM)
+
 ## Usage
 
 ```
